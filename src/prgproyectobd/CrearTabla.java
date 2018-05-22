@@ -23,6 +23,7 @@ public class CrearTabla extends javax.swing.JFrame {
      */
     public CrearTabla() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -234,14 +235,14 @@ public class CrearTabla extends javax.swing.JFrame {
                     sqlcreate = sqlcreate + nprimary.get(i);
                     System.out.println(sqlcreate);
                 } else {
-                    sqlcreate = sqlcreate +","+ nprimary.get(i);
+                    sqlcreate = sqlcreate + "," + nprimary.get(i);
                     System.out.println(sqlcreate);
                 }
             }
             sqlcreate = sqlcreate + ")";
             System.out.println(sqlcreate);
         }
-        
+
         sqlcreate = sqlcreate + ");";
         System.out.println(sqlcreate);
 
