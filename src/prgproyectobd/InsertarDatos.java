@@ -16,6 +16,7 @@ public class InsertarDatos extends javax.swing.JFrame {
      */
     public InsertarDatos() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
