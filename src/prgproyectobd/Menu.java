@@ -18,6 +18,7 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -104,13 +105,14 @@ public class Menu extends javax.swing.JFrame {
             Alumno alumno = new Alumno(id, nombre, dni);
 
             Metodos.saveAlumno(alumno);
-        }else if(opciones.getSelectedIndex() == 2){
-        
-        this.setVisible(false);
-        Tablas t = new Tablas();
-        t.setVisible(true);
-            
-        }else if(opciones.getSelectedIndex() == 3){}
+        } else if (opciones.getSelectedIndex() == 2) {
+
+            this.setVisible(false);
+            Tablas t = new Tablas();
+            t.setVisible(true);
+
+        } else if (opciones.getSelectedIndex() == 3) {
+        }
 
 
     }//GEN-LAST:event_aceptarActionPerformed
