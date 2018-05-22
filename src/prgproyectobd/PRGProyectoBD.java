@@ -6,10 +6,9 @@
 package prgproyectobd;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -18,6 +17,7 @@ import java.util.logging.Logger;
 public class PRGProyectoBD {
 
     static Connection conn;
+    static DatabaseMetaData meta;
 
     /**
      * @param args the command line arguments
