@@ -208,7 +208,9 @@ public class Insertar extends javax.swing.JFrame {
                     }
                 }
 
-                PreparedStatement st = PRGProyectoBD.conn.prepareStatement("insert into " + String.valueOf(tablas.getSelectedItem()) + " values (" + cadena + ");");
+                PreparedStatement st = PRGProyectoBD.conn.prepareStatement("insert into "
+                        + String.valueOf(tablas.getSelectedItem())
+                        + " values (" + cadena + ");");
                 st.executeUpdate();
                 System.out.println("Realizado.");
                 cargado = true;
