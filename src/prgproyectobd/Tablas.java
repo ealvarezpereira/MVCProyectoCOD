@@ -146,9 +146,6 @@ public class Tablas extends javax.swing.JFrame {
     private void recargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recargarActionPerformed
 
         try {
-            ResultSet r;
-            PRGProyectoBD.meta = PRGProyectoBD.conn.getMetaData();
-            r = PRGProyectoBD.meta.getTables(null, null, null, null);
             DefaultTableModel mimodelo = new DefaultTableModel();
             datos.setEnabled(false);
 
@@ -170,16 +167,11 @@ public class Tablas extends javax.swing.JFrame {
                 }
                 mimodelo.addRow(list);
             }
-
-            
-            
             datos.setModel(mimodelo);
 
         } catch (SQLException ex) {
             System.out.println("Error metadata " + ex);
         }
-
-
     }//GEN-LAST:event_recargarActionPerformed
 
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
