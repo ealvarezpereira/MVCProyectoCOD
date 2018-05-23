@@ -229,22 +229,17 @@ public class CrearTabla extends javax.swing.JFrame {
 
         if (seleccionado == true) {
             sqlcreate = sqlcreate + "," + primarykey.getText() + "(";
-            System.out.println(sqlcreate);
             for (int i = 0; i < nprimary.size(); i++) {
                 if (i == 0) {
                     sqlcreate = sqlcreate + nprimary.get(i);
-                    System.out.println(sqlcreate);
                 } else {
                     sqlcreate = sqlcreate + "," + nprimary.get(i);
-                    System.out.println(sqlcreate);
                 }
             }
             sqlcreate = sqlcreate + ")";
-            System.out.println(sqlcreate);
         }
 
         sqlcreate = sqlcreate + ");";
-        System.out.println(sqlcreate);
 
         try {
             PreparedStatement st = PRGProyectoBD.conn.prepareStatement(sqlcreate);
