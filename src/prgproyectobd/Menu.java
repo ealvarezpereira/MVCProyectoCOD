@@ -5,8 +5,6 @@
  */
 package prgproyectobd;
 
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author quique
