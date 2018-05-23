@@ -32,7 +32,6 @@ public class Tablas extends javax.swing.JFrame {
                 tablas.addItem(r.getString("TABLE_NAME"));
             }
         } catch (SQLException ex) {
-            System.out.println("pene");
             System.out.println("Error metadata " + ex);
         }
 
@@ -72,8 +71,29 @@ public class Tablas extends javax.swing.JFrame {
             new String [] {
                 "", "", "", ""
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(datos);
+        if (datos.getColumnModel().getColumnCount() > 0) {
+            datos.getColumnModel().getColumn(0).setResizable(false);
+            datos.getColumnModel().getColumn(1).setResizable(false);
+            datos.getColumnModel().getColumn(2).setResizable(false);
+            datos.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         recargar.setText("Recargar");
         recargar.addActionListener(new java.awt.event.ActionListener() {
@@ -130,17 +150,29 @@ public class Tablas extends javax.swing.JFrame {
             PRGProyectoBD.meta = PRGProyectoBD.conn.getMetaData();
             r = PRGProyectoBD.meta.getTables(null, null, null, null);
             DefaultTableModel mimodelo = new DefaultTableModel();
+            datos.setEnabled(false);
 
             Statement st = PRGProyectoBD.conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from " +String.valueOf(tablas.getSelectedItem()));
+            ResultSet rs = st.executeQuery("select * from " + String.valueOf(tablas.getSelectedItem()));
             ResultSetMetaData rsmd = rs.getMetaData();
 
-            for (int j = 0; j < rsmd.getColumnCount(); j++) {
-
-                System.out.println(rsmd.getColumnName(j + 1));
-                mimodelo.addColumn(rsmd.getColumnName(j + 1));
+            for (int i = 0; i < rsmd.getColumnCount(); i++) {
+                mimodelo.addColumn(rsmd.getColumnName(i + 1));
             }
 
+            datos.setModel(mimodelo);
+
+            while (rs.next()) {
+                Object[] list = new Object[rsmd.getColumnCount()];
+
+                for (int i = 0; i < rsmd.getColumnCount(); i++) {
+                    list[i] = rs.getString(i + 1);
+                }
+                mimodelo.addRow(list);
+            }
+
+            
+            
             datos.setModel(mimodelo);
 
         } catch (SQLException ex) {
