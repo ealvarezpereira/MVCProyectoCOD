@@ -151,18 +151,17 @@ public class Tablas extends javax.swing.JFrame {
 
             Statement st = PRGProyectoBD.conn.createStatement();
             ResultSet rs = st.executeQuery("select * from " + String.valueOf(tablas.getSelectedItem()));
-            ResultSetMetaData rsmd = rs.getMetaData();
 
-            for (int i = 0; i < rsmd.getColumnCount(); i++) {
-                mimodelo.addColumn(rsmd.getColumnName(i + 1));
+            for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
+                mimodelo.addColumn(rs.getMetaData().getColumnName(i + 1));
             }
 
             datos.setModel(mimodelo);
 
             while (rs.next()) {
-                Object[] list = new Object[rsmd.getColumnCount()];
+                Object[] list = new Object[rs.getMetaData().getColumnCount()];
 
-                for (int i = 0; i < rsmd.getColumnCount(); i++) {
+                for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
                     list[i] = rs.getString(i + 1);
                 }
                 mimodelo.addRow(list);
