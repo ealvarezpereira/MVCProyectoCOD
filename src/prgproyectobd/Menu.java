@@ -87,33 +87,30 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
-
+        
         System.exit(0);
     }//GEN-LAST:event_cancelarActionPerformed
 
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
-
+        
         if (opciones.getSelectedIndex() == 0) {
             CrearTabla t = new CrearTabla();
             this.setVisible(false);
             t.setVisible(true);
         } else if (opciones.getSelectedIndex() == 1) {
-
-            int id = Integer.parseInt(JOptionPane.showInputDialog("ID de alumno"));
-            String nombre = JOptionPane.showInputDialog("Nombre de alumno");
-            String dni = JOptionPane.showInputDialog("DNI de alumno");
-            Alumno alumno = new Alumno(id, nombre, dni);
-
-            Metodos.saveAlumno(alumno);
+            
+            Insertar i = new Insertar();
+            this.setVisible(false);
+            i.setVisible(true);
         } else if (opciones.getSelectedIndex() == 2) {
-
+            
             this.setVisible(false);
             Tablas t = new Tablas();
             t.setVisible(true);
-
+            
         } else if (opciones.getSelectedIndex() == 3) {
         }
-
+        
 
     }//GEN-LAST:event_aceptarActionPerformed
 
