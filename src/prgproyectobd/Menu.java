@@ -48,7 +48,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        opciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Crear Tabla", "Insertar Datos", "Ver Datos", "Borrar Datos" }));
+        opciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Crear Tabla", "Insertar Datos", "Buscar Datos", "Borrar Datos" }));
         opciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 opcionesActionPerformed(evt);

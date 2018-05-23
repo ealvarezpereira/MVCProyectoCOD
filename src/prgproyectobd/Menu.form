@@ -75,7 +75,7 @@
           <StringArray count="4">
             <StringItem index="0" value="Crear Tabla"/>
             <StringItem index="1" value="Insertar Datos"/>
-            <StringItem index="2" value="Ver Datos"/>
+            <StringItem index="2" value="Buscar Datos"/>
             <StringItem index="3" value="Borrar Datos"/>
           </StringArray>
         </Property>
