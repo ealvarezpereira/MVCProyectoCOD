@@ -5,6 +5,7 @@
  */
 package prgproyectobd;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -55,9 +56,8 @@ public class BorrarDatos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         datos = new javax.swing.JTable();
         recargar = new javax.swing.JButton();
-        textBuscar = new javax.swing.JTextField();
         interrogante = new javax.swing.JLabel();
-        sql = new javax.swing.JButton();
+        borrar = new javax.swing.JButton();
         condicion = new javax.swing.JButton();
         concampos = new javax.swing.JComboBox<>();
         textoCondicion = new javax.swing.JTextField();
@@ -119,10 +119,10 @@ public class BorrarDatos extends javax.swing.JFrame {
             }
         });
 
-        sql.setText("Buscar");
-        sql.addActionListener(new java.awt.event.ActionListener() {
+        borrar.setText("Borrar");
+        borrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sqlActionPerformed(evt);
+                borrarActionPerformed(evt);
             }
         });
 
@@ -149,33 +149,32 @@ public class BorrarDatos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textBuscar)
-                            .addComponent(sql, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel1)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(tablas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(recargar)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(aceptar)))
-                                    .addComponent(interrogante))
-                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(tablas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(recargar)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(aceptar)))
+                            .addComponent(interrogante))
+                        .addGap(0, 69, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(borrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(concampos, 0, 120, Short.MAX_VALUE)
-                                    .addComponent(textoCondicion))
+                                    .addComponent(concampos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(textoCondicion, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(interrogante2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(8, 8, 8)))
-                        .addGap(63, 63, 63))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(condicion, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(8, 8, 8))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(condicion, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
@@ -193,10 +192,8 @@ public class BorrarDatos extends javax.swing.JFrame {
                             .addComponent(tablas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(46, 46, 46)
                         .addComponent(interrogante)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sql)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(borrar)
                         .addGap(4, 4, 4)
                         .addComponent(condicion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -258,79 +255,46 @@ public class BorrarDatos extends javax.swing.JFrame {
 
     private void interroganteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_interroganteMouseClicked
 
-        JOptionPane.showMessageDialog(null, "Buscar: Busca los datos en la tabla"
-                + "\n... : Filtra las busquedas");
+        JOptionPane.showMessageDialog(null, "Borrar: Borra los datos en la tabla."
+                + "\n... : Filtra los datos que quieres borrar.");
     }//GEN-LAST:event_interroganteMouseClicked
 
     boolean con = false;
     String where = "";
 
-    private void sqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sqlActionPerformed
+    private void borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarActionPerformed
 
         if (con == false) {
             try {
-                DefaultTableModel mimodelo = new DefaultTableModel();
-                String ele = textBuscar.getText();
-                Statement st = PRGProyectoBD.conn.createStatement();
-                ResultSet rs = st.executeQuery("select " + ele + " from " + String.valueOf(tablas.getSelectedItem()));
-                for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
-                    mimodelo.addColumn(rs.getMetaData().getColumnName(i + 1));
-                }
 
-                datos.setModel(mimodelo);
+                PreparedStatement pst = PRGProyectoBD.conn.prepareStatement("delete from "
+                        + String.valueOf(tablas.getSelectedItem()));
+                pst.executeUpdate();
+                System.out.println("Hecho.");
 
-                while (rs.next()) {
-                    Object[] list = new Object[rs.getMetaData().getColumnCount()];
-
-                    for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
-                        list[i] = rs.getString(i + 1);
-                    }
-                    mimodelo.addRow(list);
-                }
-                datos.setModel(mimodelo);
-
-                textBuscar.setText(null);
                 textoCondicion.setText(null);
 
             } catch (SQLException ex) {
-                System.out.println("Error al buscar datos. " + ex);
+                System.out.println("Error al borrar datos. " + ex);
             }
 
         } else {
 
             try {
-                DefaultTableModel mimodelo = new DefaultTableModel();
-                String ele = textBuscar.getText();
-                Statement st = PRGProyectoBD.conn.createStatement();
-
                 where = " where " + concampos.getSelectedItem() + " = " + "'" + textoCondicion.getText() + "';";
-//                System.out.println("select " + ele + " from " + String.valueOf(tablas.getSelectedItem()) + where);
-                ResultSet rs = st.executeQuery("select " + ele + " from " + String.valueOf(tablas.getSelectedItem()) + where);
 
-                for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
-                    mimodelo.addColumn(rs.getMetaData().getColumnName(i + 1));
-                }
+                PreparedStatement pst = PRGProyectoBD.conn.prepareStatement("delete from "
+                        + String.valueOf(tablas.getSelectedItem())+where);
+                pst.executeUpdate();
+                System.out.println("Pene. Hecho.");
 
-                datos.setModel(mimodelo);
-
-                while (rs.next()) {
-                    Object[] list = new Object[rs.getMetaData().getColumnCount()];
-
-                    for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
-                        list[i] = rs.getString(i + 1);
-                    }
-                    mimodelo.addRow(list);
-                }
-                datos.setModel(mimodelo);
-
-                textBuscar.setText(null);
                 textoCondicion.setText(null);
 
             } catch (SQLException ex) {
                 System.out.println("Error al buscar datos. " + ex);
             }
         }
-    }//GEN-LAST:event_sqlActionPerformed
+    }//GEN-LAST:event_borrarActionPerformed
 
     private void condicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_condicionActionPerformed
         try {
@@ -351,8 +315,8 @@ public class BorrarDatos extends javax.swing.JFrame {
     }//GEN-LAST:event_condicionActionPerformed
 
     private void interrogante2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_interrogante2MouseClicked
-        JOptionPane.showMessageDialog(null, "Cuadro de texto: Valor que quieres buscar"
-                + "\nComboBox : Campo del valor que quieres buscar");
+        JOptionPane.showMessageDialog(null, "Cuadro de texto: Valor que quieres borrar"
+                + "\nComboBox : Campo del valor que quieres borrar");
     }//GEN-LAST:event_interrogante2MouseClicked
 
     /**
@@ -393,6 +357,7 @@ public class BorrarDatos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton aceptar;
+    public javax.swing.JButton borrar;
     public javax.swing.JComboBox<String> concampos;
     public javax.swing.JButton condicion;
     public javax.swing.JTable datos;
@@ -401,9 +366,7 @@ public class BorrarDatos extends javax.swing.JFrame {
     public javax.swing.JLabel jLabel1;
     public javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JButton recargar;
-    public javax.swing.JButton sql;
     public javax.swing.JComboBox<String> tablas;
-    public javax.swing.JTextField textBuscar;
     public javax.swing.JTextField textoCondicion;
     // End of variables declaration//GEN-END:variables
 }
