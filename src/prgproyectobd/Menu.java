@@ -48,7 +48,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        opciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Crear Tabla", "Insertar Datos", "Buscar Datos", "Borrar Datos" }));
+        opciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Crear Tabla", "Insertar Datos", "Buscar Datos", "Borrar Datos", "Modificar Datos" }));
         opciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 opcionesActionPerformed(evt);
@@ -85,33 +85,48 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
-        
+
         System.exit(0);
     }//GEN-LAST:event_cancelarActionPerformed
 
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
-        
-        if (opciones.getSelectedIndex() == 0) {
-            CrearTabla t = new CrearTabla();
-            this.setVisible(false);
-            t.setVisible(true);
-        } else if (opciones.getSelectedIndex() == 1) {
-            
-            Insertar i = new Insertar();
-            this.setVisible(false);
-            i.setVisible(true);
-        } else if (opciones.getSelectedIndex() == 2) {
-            
-            this.setVisible(false);
-            Tablas t = new Tablas();
-            t.setVisible(true);
-            
-        } else if (opciones.getSelectedIndex() == 3) {
-            BorrarDatos b = new BorrarDatos();
-            b.setVisible(true);
-            this.setVisible(false);
+
+        switch (opciones.getSelectedIndex()) {
+
+            case 0:
+                CrearTabla c = new CrearTabla();
+                this.setVisible(false);
+                c.setVisible(true);
+                break;
+
+            case 1:
+                Insertar i = new Insertar();
+                this.setVisible(false);
+                i.setVisible(true);
+                break;
+
+            case 2:
+                Tablas t = new Tablas();
+                this.setVisible(false);
+                t.setVisible(true);
+                break;
+
+            case 3:
+                BorrarDatos b = new BorrarDatos();
+                this.setVisible(false);
+                b.setVisible(true);
+                break;
+
+            case 4:
+                ModificarDatos m = new ModificarDatos();
+                this.setVisible(false);
+                m.setVisible(true);
+                break;
+
+            default:
+                System.out.println("Error.");
         }
-        
+
 
     }//GEN-LAST:event_aceptarActionPerformed
 
