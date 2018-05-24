@@ -107,6 +107,9 @@ public class Menu extends javax.swing.JFrame {
             t.setVisible(true);
             
         } else if (opciones.getSelectedIndex() == 3) {
+            BorrarDatos b = new BorrarDatos();
+            b.setVisible(true);
+            this.setVisible(false);
         }
         
 
