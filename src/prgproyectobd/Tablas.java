@@ -34,6 +34,8 @@ public class Tablas extends javax.swing.JFrame {
             while (r.next()) {
                 tablas.addItem(r.getString("TABLE_NAME"));
             }
+            
+            r.close();
         } catch (SQLException ex) {
             System.out.println("Error metadata " + ex);
         }
@@ -242,6 +244,8 @@ public class Tablas extends javax.swing.JFrame {
 
             concampos.removeAllItems();
 
+            st.close();
+            rs.close();
         } catch (SQLException ex) {
             System.out.println("Error metadata " + ex);
         }
@@ -292,6 +296,8 @@ public class Tablas extends javax.swing.JFrame {
                 textBuscar.setText(null);
                 textoCondicion.setText(null);
 
+                st.close();
+                rs.close();
             } catch (SQLException ex) {
                 System.out.println("Error al buscar datos. " + ex);
             }
@@ -326,6 +332,8 @@ public class Tablas extends javax.swing.JFrame {
                 textBuscar.setText(null);
                 textoCondicion.setText(null);
 
+                st.close();
+                rs.close();
             } catch (SQLException ex) {
                 System.out.println("Error al buscar datos. " + ex);
             }
@@ -345,6 +353,9 @@ public class Tablas extends javax.swing.JFrame {
             for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
                 concampos.addItem(rs.getMetaData().getColumnName(i + 1));
             }
+            
+            rs.close();
+            st.close();
         } catch (SQLException ex) {
             System.out.println("Error " + ex);
         }

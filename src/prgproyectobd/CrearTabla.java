@@ -248,6 +248,7 @@ public class CrearTabla extends javax.swing.JFrame {
                 System.out.println("Finalizando... Cerrando el estado.");
                 st.close();
             }
+            
         } catch (SQLException ex) {
             System.out.println("Error " + ex);
         }

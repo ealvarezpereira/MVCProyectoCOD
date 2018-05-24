@@ -32,6 +32,8 @@ public class Insertar extends javax.swing.JFrame {
             while (r.next()) {
                 tablas.addItem(r.getString("TABLE_NAME"));
             }
+            
+            r.close();
         } catch (SQLException ex) {
             System.out.println("Error metadata " + ex);
         }
@@ -187,6 +189,9 @@ public class Insertar extends javax.swing.JFrame {
                 datos.setModel(mimodelo);
                 prueba = String.valueOf(tablas.getSelectedItem());
 
+                st.close();
+                rs.close();
+                
             } catch (SQLException ex) {
                 System.out.println("Error metadata " + ex);
             }
@@ -214,6 +219,7 @@ public class Insertar extends javax.swing.JFrame {
                 st.executeUpdate();
                 System.out.println("Realizado.");
                 cargado = true;
+                st.close();
 
             } catch (Exception ex) {
                 System.out.println("Error de inserccion " + ex);

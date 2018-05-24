@@ -238,6 +238,9 @@ public class BorrarDatos extends javax.swing.JFrame {
             datos.setModel(mimodelo);
 
             concampos.removeAllItems();
+            
+            st.close();
+            rs.close();
 
         } catch (SQLException ex) {
             System.out.println("Error metadata " + ex);
@@ -273,6 +276,7 @@ public class BorrarDatos extends javax.swing.JFrame {
                 System.out.println("Hecho.");
 
                 textoCondicion.setText(null);
+                pst.close();
 
             } catch (SQLException ex) {
                 System.out.println("Error al borrar datos. " + ex);
@@ -289,7 +293,8 @@ public class BorrarDatos extends javax.swing.JFrame {
                 System.out.println("Pene. Hecho.");
 
                 textoCondicion.setText(null);
-
+                pst.close();
+                
             } catch (SQLException ex) {
                 System.out.println("Error al buscar datos. " + ex);
             }
@@ -309,6 +314,9 @@ public class BorrarDatos extends javax.swing.JFrame {
             for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
                 concampos.addItem(rs.getMetaData().getColumnName(i + 1));
             }
+            
+            st.close();
+            rs.close();
         } catch (SQLException ex) {
             System.out.println("Error " + ex);
         }
