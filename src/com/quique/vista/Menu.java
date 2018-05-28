@@ -5,9 +5,6 @@
  */
 package com.quique.vista;
 
-import com.quique.vista.Insertar;
-import com.quique.vista.CrearTabla;
-import com.quique.vista.BorrarDatos;
 
 /**
  *
@@ -93,31 +90,31 @@ public class Menu extends javax.swing.JFrame {
         switch (opciones.getSelectedIndex()) {
 
             case 0:
-                CrearTabla c = new CrearTabla();
+                VISTACrearTablas c = new VISTACrearTablas();
                 this.setVisible(false);
                 c.setVisible(true);
                 break;
 
             case 1:
-                Insertar i = new Insertar();
+                VISTAInsertar i = new VISTAInsertar();
                 this.setVisible(false);
                 i.setVisible(true);
                 break;
 
             case 2:
-                Tablas t = new Tablas();
+                VISTATablas t = new VISTATablas();
                 this.setVisible(false);
                 t.setVisible(true);
                 break;
 
             case 3:
-                BorrarDatos b = new BorrarDatos();
+                VISTABorrarDatos b = new VISTABorrarDatos();
                 this.setVisible(false);
                 b.setVisible(true);
                 break;
 
             case 4:
-                ModificarDatos m = new ModificarDatos();
+                VISTAModificarDatos m = new VISTAModificarDatos();
                 this.setVisible(false);
                 m.setVisible(true);
                 break;
