@@ -6,7 +6,7 @@
 package com.quique.controlador;
 
 import com.quique.modelo.CNXBorrarDatos;
-import com.quique.vista.BorrarDatos;
+import com.quique.vista.VISTABorrarDatos;
 import java.sql.*;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
@@ -32,7 +32,7 @@ public class CTRLBorrarDatos {
     private static JComboBox tablas;
 
     public static JComboBox tablas() {
-        return tablas = BorrarDatos.tablas;
+        return tablas = VISTABorrarDatos.tablas;
     }
 
     private static ResultSet r2;
@@ -50,13 +50,13 @@ public class CTRLBorrarDatos {
     private static JComboBox<String> campos;
 
     public static JComboBox recibirCampos() {
-        return campos = BorrarDatos.concampos;
+        return campos = VISTABorrarDatos.concampos;
     }
 
     private static String textCond;
 
     public static String textoCond() {
-        return textCond = BorrarDatos.textoCondicion.getText();
+        return textCond = VISTABorrarDatos.textoCondicion.getText();
     }
     
     public static void botonBorrarDatos(){
