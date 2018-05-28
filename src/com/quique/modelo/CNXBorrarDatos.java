@@ -6,9 +6,7 @@
 package com.quique.modelo;
 
 import com.quique.controlador.CTRLBorrarDatos;
-import java.sql.Connection;
 import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,27 +20,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CNXBorrarDatos {
 
-    public static Connection conn;
-    public static DatabaseMetaData meta;
 
-    //Metodo para la conexion directa a la base de datos
-    public static Connection conexionABD() {
-        try {
-            String url = "jdbc:sqlite:" + "/home/quique/Documentos/BasesDatos/base.db";
-            conn = DriverManager.getConnection(url);
-
-        } catch (SQLException ex) {
-            System.out.println("Error de conexion " + ex);
-        }
-
-        return conn;
-    }
 
     //Metodo para recargar las tablas en el jcombobox. Directo al constructor de BorrarDatos
     public static ResultSet borrarDatosConstructor() {
         ResultSet r = null;
+        DatabaseMetaData meta;
         try {
-            meta = conn.getMetaData();
+            meta = ConexionBD.conexionABD().getMetaData();
             r = meta.getTables(null, null, null, null);
 
         } catch (SQLException ex) {
@@ -61,7 +46,7 @@ public class CNXBorrarDatos {
         tablas = CTRLBorrarDatos.tablas();
 
         try {
-            st = conn.createStatement();
+            st = ConexionBD.conexionABD().createStatement();
             rs = st.executeQuery("select * from " + String.valueOf(tablas.getSelectedItem()));
         } catch (SQLException ex) {
             System.out.println("Error al seleccionar datos. " + ex);
@@ -99,7 +84,7 @@ public class CNXBorrarDatos {
         if (con == false) {
             try {
 
-                PreparedStatement pst = CNXBorrarDatos.conn.prepareStatement("delete from "
+                PreparedStatement pst = ConexionBD.conexionABD().prepareStatement("delete from "
                         + String.valueOf(tablas.getSelectedItem()));
                 pst.executeUpdate();
                 System.out.println("Hecho.");
@@ -113,7 +98,7 @@ public class CNXBorrarDatos {
             try {
                 where = " where " + CTRLBorrarDatos.recibirCampos().getSelectedItem() + " = " + "'" + CTRLBorrarDatos.textoCond() + "';";
 
-                PreparedStatement pst = CNXBorrarDatos.conn.prepareStatement("delete from "
+                PreparedStatement pst = ConexionBD.conexionABD().prepareStatement("delete from "
                         + String.valueOf(tablas.getSelectedItem()) + where);
                 pst.executeUpdate();
                 System.out.println("Pene. Hecho.");
@@ -130,7 +115,7 @@ public class CNXBorrarDatos {
         try {
             con = true;
 
-            Statement st = CNXBorrarDatos.conn.createStatement();
+            Statement st = ConexionBD.conexionABD().createStatement();
             ResultSet rs = st.executeQuery("select * from " + String.valueOf(CTRLBorrarDatos.tablas().getSelectedItem()));
 
             for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
