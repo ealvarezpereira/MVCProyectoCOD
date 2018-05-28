@@ -5,14 +5,9 @@
  */
 package com.quique.modelo;
 
-import com.quique.controlador.Controlador;
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import javax.swing.JComboBox;
 
 /**
  *
@@ -21,8 +16,8 @@ import javax.swing.JComboBox;
 public class ConexionBD {
 
     public static Connection conn;
-    public static DatabaseMetaData meta;
 
+    //Metodo para la conexion directa a la base de datos
     public static Connection conexionABD() {
         try {
             String url = "jdbc:sqlite:" + "/home/quique/Documentos/BasesDatos/base.db";
@@ -34,36 +29,4 @@ public class ConexionBD {
 
         return conn;
     }
-
-    public static ResultSet borrarDatosConstructor() {
-        ResultSet r = null;
-        try {
-            meta = conn.getMetaData();
-            r = meta.getTables(null, null, null, null);
-
-        } catch (SQLException ex) {
-            System.out.println("Error metadata " + ex);
-        }
-
-        return r;
-    }
-
-    private static Statement st;
-    private static ResultSet rs;
-    private static JComboBox tablas;
-
-    public static ResultSet borrarDatosResultSet() {
-
-        tablas = Controlador.tablas();
-
-        try {
-            st = conn.createStatement();
-            rs = st.executeQuery("select * from " + String.valueOf(tablas.getSelectedItem()));
-        } catch (SQLException ex) {
-            System.out.println("Error al seleccionar datos. " + ex);
-        }
-
-        return rs;
-    }
-
 }
