@@ -5,10 +5,7 @@
  */
 package codproyectomvc;
 
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import com.quique.vista.Menu;
 
 /**
  *
@@ -16,21 +13,10 @@ import java.sql.SQLException;
  */
 public class CODProyectoMVC {
 
-    static Connection conn;
-    static DatabaseMetaData meta;
-
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
-        try {
-            String url = "jdbc:sqlite:" + "/home/quique/Documentos/BasesDatos/base.db";
-            conn = DriverManager.getConnection(url);
-
-        } catch (SQLException ex) {
-            System.out.println("Error de conexion " + ex);
-        }
 
         Menu men = new Menu();
         men.setVisible(true);
