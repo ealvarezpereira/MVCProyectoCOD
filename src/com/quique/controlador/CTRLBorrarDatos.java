@@ -17,12 +17,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CTRLBorrarDatos {
 
-    private static Connection conexion;
-
-    public static Connection conn() {
-        return conexion = CNXBorrarDatos.conexionABD();
-    }
-
     private static ResultSet r;
 
     public static ResultSet resul() {
