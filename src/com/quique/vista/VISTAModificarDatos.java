@@ -5,6 +5,7 @@
  */
 package com.quique.vista;
 
+import com.quique.controlador.CTRLModificarDatos;
 import com.quique.modelo.ConexionBD;
 import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
@@ -12,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,18 +33,7 @@ public class VISTAModificarDatos extends javax.swing.JFrame {
         textoCondicion.setVisible(false);
         interrogante2.setVisible(false);
 
-        try {
-            ResultSet r;
-            DatabaseMetaData meta;
-            meta = ConexionBD.conn.getMetaData();
-            r = meta.getTables(null, null, null, null);
-            while (r.next()) {
-                tablas.addItem(r.getString("TABLE_NAME"));
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error metadata " + ex);
-        }
-
+        cargarJComboBox();
     }
 
     /**
@@ -216,43 +207,15 @@ public class VISTAModificarDatos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    ArrayList<String> acampos = new ArrayList<String>();
-    ArrayList<String> adatos = new ArrayList<String>();
-
+    private void cargarJComboBox() {
+        tablas.setModel(new DefaultComboBoxModel(CTRLModificarDatos.constructorModificarDatos().toArray()));
+    }
 
     private void recargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recargarActionPerformed
+        datos.setEnabled(true);
+        datos.setModel(CTRLModificarDatos.botonRecargar());
+        concampos.removeAllItems();
 
-        try {
-            DefaultTableModel mimodelo = new DefaultTableModel();
-            datos.setEnabled(true);
-
-            Statement st = ConexionBD.conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from " + String.valueOf(tablas.getSelectedItem()));
-
-            for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
-                mimodelo.addColumn(rs.getMetaData().getColumnName(i + 1));
-            }
-
-            datos.setModel(mimodelo);
-
-            while (rs.next()) {
-                Object[] list = new Object[rs.getMetaData().getColumnCount()];
-
-                for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
-                    list[i] = rs.getString(i + 1);
-                }
-                mimodelo.addRow(list);
-            }
-            datos.setModel(mimodelo);
-
-            concampos.removeAllItems();
-
-            st.close();
-            rs.close();
-
-        } catch (SQLException ex) {
-            System.out.println("Error metadata " + ex);
-        }
         textoCondicion.setVisible(false);
         concampos.setVisible(false);
         interrogante2.setVisible(false);
@@ -270,69 +233,25 @@ public class VISTAModificarDatos extends javax.swing.JFrame {
                 + "\n... : Filtra los datos que quieres borrar.");
     }//GEN-LAST:event_interroganteMouseClicked
 
-    String where = "";
-    String cadena = "";
+    ArrayList<String> adatos = new ArrayList<String>();
+
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
 
-        try {
-            for (int i = 0; i < datos.getColumnCount(); i++) {
-                adatos.add((String) this.datos.getValueAt(datos.getSelectedRow(), i));
-            }
-            Statement st = ConexionBD.conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from " + String.valueOf(tablas.getSelectedItem()));
-
-            for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
-                acampos.add(rs.getMetaData().getColumnName(i + 1));
-            }
-
-            for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
-
-                if (i == datos.getColumnCount() - 1) {
-                    cadena = cadena + acampos.get(i) + " = " + "'" + adatos.get(i) + "'";
-                } else {
-                    cadena = cadena + acampos.get(i) + " = " + "'" + adatos.get(i) + "'" + ",";
-                }
-
-            }
-            where = " where " + concampos.getSelectedItem() + " = " + "'" + textoCondicion.getText() + "';";
-
-            System.out.println("update " + tablas.getSelectedItem() + " set "
-                    + cadena + where);
-
-            PreparedStatement pst = ConexionBD.conn.prepareStatement("update " + tablas.getSelectedItem() + " set "
-                    + cadena + where);
-            pst.executeUpdate();
-            System.out.println("Hecho.");
-
-            textoCondicion.setText(null);
-            pst.close();
-            st.close();
-            rs.close();
-
-        } catch (SQLException ex) {
-            System.out.println("Error al borrar datos. " + ex);
+        for (int i = 0; i < datos.getColumnCount(); i++) {
+            adatos.add((String) this.datos.getValueAt(datos.getSelectedRow(), i));
         }
+
+        CTRLModificarDatos.botonModificar(adatos, String.valueOf(concampos.getSelectedItem()), textoCondicion.getText());
+        textoCondicion.setText(null);
+
     }//GEN-LAST:event_modificarActionPerformed
 
     private void condicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_condicionActionPerformed
-        try {
-            textoCondicion.setVisible(true);
-            interrogante2.setVisible(true);
-            concampos.setVisible(true);
-
-            Statement st = ConexionBD.conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from " + String.valueOf(tablas.getSelectedItem()));
-
-            for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
-                concampos.addItem(rs.getMetaData().getColumnName(i + 1));
-            }
-
-            st.close();
-            rs.close();
-        } catch (SQLException ex) {
-            System.out.println("Error " + ex);
-        }
+        textoCondicion.setVisible(true);
+        interrogante2.setVisible(true);
+        concampos.setVisible(true);
+        concampos.setModel(new DefaultComboBoxModel(CTRLModificarDatos.botonCondicion().toArray()));
     }//GEN-LAST:event_condicionActionPerformed
 
     private void interrogante2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_interrogante2MouseClicked
@@ -386,16 +305,16 @@ public class VISTAModificarDatos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton aceptar;
-    public javax.swing.JComboBox<String> concampos;
+    public static javax.swing.JComboBox<String> concampos;
     public javax.swing.JButton condicion;
-    public javax.swing.JTable datos;
+    public static javax.swing.JTable datos;
     public javax.swing.JLabel interrogante;
     public javax.swing.JLabel interrogante2;
     public javax.swing.JLabel jLabel1;
     public javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JButton modificar;
     public javax.swing.JButton recargar;
-    public javax.swing.JComboBox<String> tablas;
+    public static javax.swing.JComboBox<String> tablas;
     public javax.swing.JTextField textoCondicion;
     // End of variables declaration//GEN-END:variables
 }

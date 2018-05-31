@@ -5,10 +5,39 @@
  */
 package com.quique.controlador;
 
+import com.quique.modelo.CNXModificarDatos;
+import com.quique.vista.VISTAModificarDatos;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author quique
  */
 public class CTRLModificarDatos {
+
+    public static ArrayList<String> constructorModificarDatos() {
+        ArrayList<String> tablas = new ArrayList<String>();
+        return tablas = CNXModificarDatos.constructorModificarDatos();
+    }
     
+        public static String tablas() {
+        String tablas;
+        return tablas = String.valueOf(VISTAModificarDatos.tablas.getSelectedItem());
+    }
+        
+        public static DefaultTableModel botonRecargar(){
+        DefaultTableModel modelo = new DefaultTableModel();
+        return modelo = CNXModificarDatos.botonRecargar();
+        }    
+        
+        public static ArrayList<String> botonCondicion() {
+        ArrayList<String> concampos = new ArrayList<String>();
+        return concampos = CNXModificarDatos.botonCondicion();
+    }
+        
+        public static void botonModificar(ArrayList<String>adatos,String concampos, String textoCondicion){
+        
+        CNXModificarDatos.botonModificar(adatos, concampos, textoCondicion);
+        }
 }
