@@ -8,6 +8,7 @@ package com.quique.vista;
 import com.quique.controlador.CTRLBorrarDatos;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author quique
@@ -198,17 +199,16 @@ public class VISTABorrarDatos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
     //Carga las tablas en el JComboBox.
-        private void cargarConstructor() {       
-            tablas.setModel(new DefaultComboBoxModel(CTRLBorrarDatos.constructor().toArray()));
+    private void cargarConstructor() {
+        tablas.setModel(new DefaultComboBoxModel(CTRLBorrarDatos.constructor().toArray()));
     }
-    
-    
+
+
     private void recargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recargarActionPerformed
 
         datos.setModel(CTRLBorrarDatos.botRecargar());
-                    concampos.removeAllItems();
+        concampos.removeAllItems();
 
         textoCondicion.setVisible(false);
         concampos.setVisible(false);
@@ -230,7 +230,7 @@ public class VISTABorrarDatos extends javax.swing.JFrame {
 
     private void borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarActionPerformed
 
-
+        CTRLBorrarDatos.borrar(String.valueOf(this.concampos.getSelectedItem()), textoCondicion.getText());
         textoCondicion.setText(null);
     }//GEN-LAST:event_borrarActionPerformed
 
@@ -239,6 +239,8 @@ public class VISTABorrarDatos extends javax.swing.JFrame {
         textoCondicion.setVisible(true);
         interrogante2.setVisible(true);
         concampos.setVisible(true);
+        
+        concampos.setModel(new DefaultComboBoxModel(CTRLBorrarDatos.condicion().toArray()));
 
     }//GEN-LAST:event_condicionActionPerformed
 
