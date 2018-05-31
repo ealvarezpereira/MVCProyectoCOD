@@ -6,10 +6,8 @@
 package com.quique.vista;
 
 import com.quique.controlador.CTRLBorrarDatos;
-import java.sql.SQLException;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author quique
@@ -26,15 +24,7 @@ public class VISTABorrarDatos extends javax.swing.JFrame {
         concampos.setVisible(false);
         textoCondicion.setVisible(false);
         interrogante2.setVisible(false);
-
-        try {
-            while (CTRLBorrarDatos.resul().next()) {
-                tablas.addItem(CTRLBorrarDatos.resul().getString("TABLE_NAME"));
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error en el constructor: " + ex);
-        }
-
+        cargarConstructor();
     }
 
     /**
@@ -208,22 +198,18 @@ public class VISTABorrarDatos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    //Carga las tablas en el JComboBox.
+        private void cargarConstructor() {       
+            tablas.setModel(new DefaultComboBoxModel(CTRLBorrarDatos.constructor().toArray()));
+    }
+    
+    
     private void recargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recargarActionPerformed
 
-        try {
-            DefaultTableModel mimodelo = new DefaultTableModel();
-            datos.setEnabled(false);
+        datos.setModel(CTRLBorrarDatos.botRecargar());
+                    concampos.removeAllItems();
 
-            for (int i = 0; i < CTRLBorrarDatos.resul2().getMetaData().getColumnCount(); i++) {
-                mimodelo.addColumn(CTRLBorrarDatos.resul2().getMetaData().getColumnName(i + 1));
-            }
-            datos.setModel(mimodelo);
-            datos.setModel(CTRLBorrarDatos.modelo());
-            concampos.removeAllItems();
-
-        } catch (Exception ex) {
-            System.out.println("Error al recargar. " + ex);
-        }
         textoCondicion.setVisible(false);
         concampos.setVisible(false);
         interrogante2.setVisible(false);
@@ -244,7 +230,7 @@ public class VISTABorrarDatos extends javax.swing.JFrame {
 
     private void borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarActionPerformed
 
-        CTRLBorrarDatos.botonBorrarDatos();
+
         textoCondicion.setText(null);
     }//GEN-LAST:event_borrarActionPerformed
 
@@ -254,7 +240,6 @@ public class VISTABorrarDatos extends javax.swing.JFrame {
         interrogante2.setVisible(true);
         concampos.setVisible(true);
 
-        CTRLBorrarDatos.botonCondicion();
     }//GEN-LAST:event_condicionActionPerformed
 
     private void interrogante2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_interrogante2MouseClicked
@@ -314,4 +299,5 @@ public class VISTABorrarDatos extends javax.swing.JFrame {
     public static javax.swing.JComboBox<String> tablas;
     public static javax.swing.JTextField textoCondicion;
     // End of variables declaration//GEN-END:variables
+
 }

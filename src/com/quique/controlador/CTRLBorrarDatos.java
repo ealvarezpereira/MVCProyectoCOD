@@ -7,8 +7,7 @@ package com.quique.controlador;
 
 import com.quique.modelo.CNXBorrarDatos;
 import com.quique.vista.VISTABorrarDatos;
-import java.sql.*;
-import javax.swing.JComboBox;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,47 +16,18 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CTRLBorrarDatos {
 
-    private static ResultSet r;
-
-    public static ResultSet resul() {
-        return r = CNXBorrarDatos.borrarDatosConstructor();
+    public static ArrayList<String> constructor() {
+        ArrayList<String> tbs = new ArrayList<String>();
+        return tbs = CNXBorrarDatos.borrarDatosConstructor();
     }
 
-    private static JComboBox tablas;
-
-    public static JComboBox tablas() {
-        return tablas = VISTABorrarDatos.tablas;
+    public static DefaultTableModel botRecargar() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        return modelo = CNXBorrarDatos.recargarBoton();
     }
 
-    private static ResultSet r2;
-
-    public static ResultSet resul2() {
-        return r2 = CNXBorrarDatos.borrarDatosResultSet();
-    }
-
-    private static DefaultTableModel model;
-
-    public static DefaultTableModel modelo() {
-        return model = CNXBorrarDatos.modeloBorrarDatos();
-    }
-
-    private static JComboBox<String> campos;
-
-    public static JComboBox recibirCampos() {
-        return campos = VISTABorrarDatos.concampos;
-    }
-
-    private static String textCond;
-
-    public static String textoCond() {
-        return textCond = VISTABorrarDatos.textoCondicion.getText();
-    }
-    
-    public static void botonBorrarDatos(){
-        CNXBorrarDatos.botonBorrarDatos();
-    }
-
-    public static void botonCondicion(){
-        CNXBorrarDatos.botonCondicion();
+    public static String tablas() {
+        String tablas;
+        return tablas = String.valueOf(VISTABorrarDatos.tablas.getSelectedItem());
     }
 }

@@ -7,11 +7,10 @@ package com.quique.modelo;
 
 import com.quique.controlador.CTRLBorrarDatos;
 import java.sql.DatabaseMetaData;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.swing.JComboBox;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,112 +19,53 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CNXBorrarDatos {
 
-
-
     //Metodo para recargar las tablas en el jcombobox. Directo al constructor de BorrarDatos
-    public static ResultSet borrarDatosConstructor() {
-        ResultSet r = null;
+    public static ArrayList<String> borrarDatosConstructor() {
+        ResultSet r;
+        ArrayList<String> tablas = new ArrayList<String>();
         DatabaseMetaData meta;
         try {
-            meta = ConexionBD.conexionABD().getMetaData();
+            meta = ConexionBD.conn.getMetaData();
             r = meta.getTables(null, null, null, null);
 
+            while (r.next()) {
+                tablas.add(r.getString("TABLE_NAME"));
+            }
+            r.close();
         } catch (SQLException ex) {
-            System.out.println("Error metadata " + ex);
+            System.out.println("Error en el constructor " + ex);
         }
 
-        return r;
+        return tablas;
     }
 
-    private static Statement st;
-    private static ResultSet rs;
-    private static JComboBox tablas;
-
-    public static ResultSet borrarDatosResultSet() {
-
-        tablas = CTRLBorrarDatos.tablas();
-
-        try {
-            st = ConexionBD.conexionABD().createStatement();
-            rs = st.executeQuery("select * from " + String.valueOf(tablas.getSelectedItem()));
-        } catch (SQLException ex) {
-            System.out.println("Error al seleccionar datos. " + ex);
-        }
-
-        return rs;
-    }
-
-    public static DefaultTableModel modeloBorrarDatos() {
-
-        DefaultTableModel modelo = new DefaultTableModel();
-
+    public static DefaultTableModel recargarBoton() {
+        DefaultTableModel mimodelo = new DefaultTableModel();
         try {
 
-            while (borrarDatosResultSet().next()) {
-                Object[] list = new Object[borrarDatosResultSet().getMetaData().getColumnCount()];
-
-                for (int i = 0; i < borrarDatosResultSet().getMetaData().getColumnCount(); i++) {
-                    list[i] = borrarDatosResultSet().getString(i + 1);
-                }
-                modelo.addRow(list);
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error con el modelo. " + ex);
-        }
-
-        return modelo;
-    }
-
-    private static boolean con = false;
-    private static String where = "";
-
-    public static void botonBorrarDatos() {
-
-        if (con == false) {
-            try {
-
-                PreparedStatement pst = ConexionBD.conexionABD().prepareStatement("delete from "
-                        + String.valueOf(tablas.getSelectedItem()));
-                pst.executeUpdate();
-                System.out.println("Hecho.");
-                pst.close();
-            } catch (SQLException ex) {
-                System.out.println("Error al borrar datos. " + ex);
-            }
-
-        } else {
-
-            try {
-                where = " where " + CTRLBorrarDatos.recibirCampos().getSelectedItem() + " = " + "'" + CTRLBorrarDatos.textoCond() + "';";
-
-                PreparedStatement pst = ConexionBD.conexionABD().prepareStatement("delete from "
-                        + String.valueOf(tablas.getSelectedItem()) + where);
-                pst.executeUpdate();
-                System.out.println("Pene. Hecho.");
-
-                pst.close();
-
-            } catch (SQLException ex) {
-                System.out.println("Error al buscar datos. " + ex);
-            }
-        }
-    }
-    
-    public static void botonCondicion(){
-        try {
-            con = true;
-
-            Statement st = ConexionBD.conexionABD().createStatement();
-            ResultSet rs = st.executeQuery("select * from " + String.valueOf(CTRLBorrarDatos.tablas().getSelectedItem()));
+            Statement st = ConexionBD.conn.createStatement();
+            ResultSet rs = st.executeQuery("select * from " + CTRLBorrarDatos.tablas());
 
             for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
-                CTRLBorrarDatos.recibirCampos().addItem(rs.getMetaData().getColumnName(i + 1));
+                mimodelo.addColumn(rs.getMetaData().getColumnName(i + 1));
+            }
+
+            while (rs.next()) {
+                Object[] list = new Object[rs.getMetaData().getColumnCount()];
+
+                for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
+                    list[i] = rs.getString(i + 1);
+                }
+                mimodelo.addRow(list);
             }
 
             st.close();
             rs.close();
+
         } catch (SQLException ex) {
-            System.out.println("Error " + ex);
+            System.out.println("Error metadata " + ex);
         }
+        
+        return mimodelo;
     }
 }
