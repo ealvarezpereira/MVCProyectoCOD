@@ -18,7 +18,7 @@ public class ConexionBD {
     public static Connection conn;
 
     //Metodo para la conexion directa a la base de datos
-    public static Connection conexionABD() {
+    public static void conexionABD() {
         try {
             String url = "jdbc:sqlite:" + "/home/quique/Documentos/BasesDatos/base.db";
             conn = DriverManager.getConnection(url);
@@ -27,6 +27,5 @@ public class ConexionBD {
             System.out.println("Error de conexion " + ex);
         }
 
-        return conn;
     }
 }
