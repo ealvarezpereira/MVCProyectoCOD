@@ -86,7 +86,7 @@ public class CNXCrearTablas {
         sqlcreate = sqlcreate + ");";
 
         try {
-            PreparedStatement st = ConexionBD.conexionABD().prepareStatement(sqlcreate);
+            PreparedStatement st = ConexionBD.conn.prepareStatement(sqlcreate);
 
             if (st.execute() == false) {
                 System.out.println("Finalizando... Cerrando el estado.");
