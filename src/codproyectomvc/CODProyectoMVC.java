@@ -5,6 +5,7 @@
  */
 package codproyectomvc;
 
+import com.quique.modelo.ConexionBD;
 import com.quique.vista.Menu;
 
 /**
@@ -18,6 +19,7 @@ public class CODProyectoMVC {
      */
     public static void main(String[] args) {
 
+        ConexionBD.conexionABD();
         Menu men = new Menu();
         men.setVisible(true);
     }
