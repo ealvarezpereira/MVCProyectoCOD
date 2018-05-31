@@ -119,8 +119,6 @@ public class CNXBorrarDatos {
                 PreparedStatement pst = ConexionBD.conn.prepareStatement("delete from "
                         + CTRLBorrarDatos.tablas()+where);
                 pst.executeUpdate();
-                System.out.println("Pene. Hecho.");
-
                 pst.close();
                 
             } catch (SQLException ex) {
