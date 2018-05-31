@@ -5,12 +5,13 @@
  */
 package com.quique.controlador;
 
+
 import com.quique.modelo.CNXInsertar;
 import com.quique.vista.VISTAInsertar;
-import java.sql.ResultSet;
-import javax.swing.JComboBox;
-import javax.swing.JTable;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+
+
 
 /**
  *
@@ -18,29 +19,27 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CTRLInsertar {
 
-    private static ResultSet r;
-
-    public static ResultSet resul() {
-        return CNXInsertar.constructorInsertar();
+        public static ArrayList<String> constructor() {
+        ArrayList<String> tbs = new ArrayList<String>();
+        return tbs = CNXInsertar.constructorDeInsertar();
     }
 
-    private static JTable tab;
-
-    public static JTable datos() {
-        return tab = VISTAInsertar.datos;
+        public static String tablas() {
+        String tablas;
+        return tablas = String.valueOf(VISTAInsertar.tablas.getSelectedItem());
     }
-
-    private static JComboBox<String> tablas;
-
-    public static JComboBox tablas() {
-        return tablas = VISTAInsertar.tablas;
-    }
-
-    public static DefaultTableModel recargar() {
-        return CNXInsertar.recargar();
-    }
-    
-    public static DefaultTableModel añadir(){
-        return CNXInsertar.añadir();
-    }
+        
+        public static DefaultTableModel botonRecargarTrue(){
+        DefaultTableModel modelo = CNXInsertar.botonRecargarDeInsertarBoolTrue();
+            return modelo;
+        }
+        
+        public static void botonRecargarFalse(String cadena){
+            CNXInsertar.botonRecargarDeInsertarBoolFalse(cadena);
+        }
+        
+        public static void cambiarBoolean(){
+            VISTAInsertar.cargado = true;
+        }
+        
 }

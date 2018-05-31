@@ -6,7 +6,9 @@
 package com.quique.vista;
 
 import com.quique.controlador.CTRLInsertar;
-import java.sql.SQLException;
+import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,13 +23,8 @@ public class VISTAInsertar extends javax.swing.JFrame {
 
         initComponents();
         this.setLocationRelativeTo(null);
-        try {
-            while (CTRLInsertar.resul().next()) {
-                tablas.addItem(CTRLInsertar.resul().getString("TABLE_NAME"));
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error en el constructor. " + ex);
-        }
+        cargarJComboBox();
+
     }
 
     /**
@@ -150,10 +147,36 @@ public class VISTAInsertar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cargarJComboBox() {
+        tablas.setModel(new DefaultComboBoxModel(CTRLInsertar.constructor().toArray()));
+    }
+
+    public static boolean cargado = true;
+    static DefaultTableModel modelo;
 
     private void recargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recargarActionPerformed
         datos.setEnabled(false);
-        datos.setModel(CTRLInsertar.recargar());
+
+        if (cargado == true) {
+            datos.setModel(CTRLInsertar.botonRecargarTrue());
+            modelo = CTRLInsertar.botonRecargarTrue();
+        } else {
+
+            String cadena = "";
+
+            int lastRow = datos.getRowCount() - 1;
+
+            for (int i = 0; i < datos.getColumnCount(); i++) {
+
+                if (i == datos.getColumnCount() - 1) {
+                    cadena = cadena + "'" + datos.getValueAt(lastRow, i) + "'";
+                } else {
+                    cadena = cadena + "'" + datos.getValueAt(lastRow, i) + "'" + ", ";
+                }
+            }
+            
+            CTRLInsertar.botonRecargarFalse(cadena);
+        }
     }//GEN-LAST:event_recargarActionPerformed
 
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
@@ -163,8 +186,12 @@ public class VISTAInsertar extends javax.swing.JFrame {
     }//GEN-LAST:event_aceptarActionPerformed
 
     private void añadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirActionPerformed
+
         datos.setEnabled(true);
-        datos.setModel(CTRLInsertar.añadir());
+        cargado = false;
+        Vector v = new Vector();
+        modelo.addRow(v);
+        datos.setModel(modelo);
 
     }//GEN-LAST:event_añadirActionPerformed
 
