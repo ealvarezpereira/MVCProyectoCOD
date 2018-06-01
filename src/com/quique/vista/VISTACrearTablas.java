@@ -153,7 +153,10 @@ public class VISTACrearTablas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
+/**
+ * Boton de añadir campo
+ * @param evt 
+ */
     private void addfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addfieldActionPerformed
 
         CTRLCrearTablas.añadirCampo();
@@ -164,6 +167,10 @@ public class VISTACrearTablas extends javax.swing.JFrame {
         unique.setSelected(false);
     }//GEN-LAST:event_addfieldActionPerformed
 
+    /**
+     * Boton de cancelar, vuelve al menu.
+     * @param evt 
+     */
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
 
         nomtabla.setText(null);
@@ -175,6 +182,10 @@ public class VISTACrearTablas extends javax.swing.JFrame {
         men.setVisible(true);
     }//GEN-LAST:event_cancelarActionPerformed
 
+    /**
+     * Boton aceptar.
+     * @param evt 
+     */
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
         CTRLCrearTablas.botAceptar();
     }//GEN-LAST:event_aceptarActionPerformed

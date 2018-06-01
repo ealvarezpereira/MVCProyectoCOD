@@ -17,6 +17,12 @@ import javax.swing.JOptionPane;
  */
 public class CNXCrearTablas {
 
+    //nombres es el arraylist de nombres de campos para evitar que se repitan.
+    //nprimary es el arraylist de campos que van a ser primary key
+    //añadido es un boolean que va cambiando segun va añadiendo nombres al array de nombres
+    //seleccionado es un boolean que dice si ha sido seleccionado el primary key
+    //m es un numero que se autoincrementa
+    //sqlcreate es la sentencia de crear tablas
     private static ArrayList<String> nombres = new ArrayList<String>();
     private static ArrayList<String> nprimary = new ArrayList<String>();
     private static boolean añadido = false;
@@ -24,7 +30,9 @@ public class CNXCrearTablas {
     private static int m = 0;
     private static String sqlcreate;
 
-
+    /**
+     * Metodo que crea la tabla y añade campos.
+     */
     public static void añadirCampo(){
     
          if (m == 0) {
@@ -70,6 +78,9 @@ public class CNXCrearTablas {
         System.out.println(sqlcreate);
     }
     
+    /**
+     * El boton aceptar va generando la sentencia sql.
+     */
     public static void btnAceptar(){
     
         if (seleccionado == true) {
