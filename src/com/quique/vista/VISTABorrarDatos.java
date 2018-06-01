@@ -199,12 +199,17 @@ public class VISTABorrarDatos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //Carga las tablas en el JComboBox.
+    /**
+     * Al JComboBox de nombres de tablas le añade el array con los nombres de las tablas.
+     */
     private void cargarConstructor() {
         tablas.setModel(new DefaultComboBoxModel(CTRLBorrarDatos.constructor().toArray()));
     }
 
-
+/**
+ * A la tabla datos le añade el modelo que recibe del controlador
+ * @param evt Evento del boton
+ */
     private void recargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recargarActionPerformed
 
         datos.setModel(CTRLBorrarDatos.botRecargar());
@@ -215,25 +220,41 @@ public class VISTABorrarDatos extends javax.swing.JFrame {
         interrogante2.setVisible(false);
     }//GEN-LAST:event_recargarActionPerformed
 
+    /**
+     * Este boton sale del programa
+     * @param evt Evento del boton
+     */
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
         Menu men = new Menu();
         this.setVisible(false);
         men.setVisible(true);
     }//GEN-LAST:event_aceptarActionPerformed
 
+    /**
+     * Label con un cuadro de texto de ayuda.
+     * @param evt Evento del label
+     */
     private void interroganteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_interroganteMouseClicked
 
         JOptionPane.showMessageDialog(null, "Borrar: Borra los datos en la tabla."
                 + "\n... : Filtra los datos que quieres borrar.");
     }//GEN-LAST:event_interroganteMouseClicked
 
-
+/**
+ * Llama al metodo de borrar datos y le pasa el campo seleccionado y el valor del campo.
+ * @param evt Evento del boton.
+ */
+    
     private void borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarActionPerformed
 
         CTRLBorrarDatos.borrar(String.valueOf(this.concampos.getSelectedItem()), textoCondicion.getText());
         textoCondicion.setText(null);
     }//GEN-LAST:event_borrarActionPerformed
 
+    /**
+     * Boton que hace visible si quieres borrar un dato en concreto.
+     * @param evt Evento del boton.
+     */
     private void condicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_condicionActionPerformed
 
         textoCondicion.setVisible(true);
@@ -244,6 +265,10 @@ public class VISTABorrarDatos extends javax.swing.JFrame {
 
     }//GEN-LAST:event_condicionActionPerformed
 
+    /**
+     * Segundo label con un cuadro de texto con información
+     * @param evt Evento del label.
+     */
     private void interrogante2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_interrogante2MouseClicked
         JOptionPane.showMessageDialog(null, "Cuadro de texto: Valor que quieres borrar"
                 + "\nComboBox : Campo del valor que quieres borrar");
