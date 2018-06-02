@@ -19,26 +19,45 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CTRLInsertar {
 
-        public static ArrayList<String> constructor() {
+    /**
+     * Llama al método del modelo y lo manda a la vista
+     * @return tbs arraylist nombre de tablas
+     */
+    public static ArrayList<String> constructor() {
         ArrayList<String> tbs = new ArrayList<String>();
         return tbs = CNXInsertar.constructorDeInsertar();
     }
 
-        public static String tablas() {
+    /**
+     * Recibe la tabla seleccionada de la vista
+     * @return el nombre de la tabla
+     */
+    public static String tablas() {
         String tablas;
         return tablas = String.valueOf(VISTAInsertar.tablas.getSelectedItem());
     }
         
-        public static DefaultTableModel botonRecargarTrue(){
+    /**
+     * Llama al metodo del modelo y se lo pasa a la vista
+     * @return modelo de tabla
+     */
+    public static DefaultTableModel botonRecargarTrue(){
         DefaultTableModel modelo = CNXInsertar.botonRecargarDeInsertarBoolTrue();
             return modelo;
         }
         
-        public static void botonRecargarFalse(String cadena){
+    /**
+     * Llama al metodo del modelo y se lo pasa a la vista
+     * @param cadena Datos introducidos
+     */
+    public static void botonRecargarFalse(String cadena){
             CNXInsertar.botonRecargarDeInsertarBoolFalse(cadena);
         }
         
-        public static void cambiarBoolean(){
+    /**
+     * Metodo que cambia el boolean de si está recargada la tabla o no.
+     */
+    public static void cambiarBoolean(){
             VISTAInsertar.cargado = true;
         }
         

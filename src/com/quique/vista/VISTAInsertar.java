@@ -147,6 +147,9 @@ public class VISTAInsertar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Carga el jcombobox de tablas.
+     */
     private void cargarJComboBox() {
         tablas.setModel(new DefaultComboBoxModel(CTRLInsertar.constructor().toArray()));
     }
@@ -154,6 +157,12 @@ public class VISTAInsertar extends javax.swing.JFrame {
     public static boolean cargado = true;
     static DefaultTableModel modelo;
 
+    
+    /**
+     * Si cargado = true llama al metodo de recargarTrue
+     * Si cargado = false coge los datos de la ultima posicion de la tabla y los inserta.
+     * @param evt 
+     */
     private void recargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recargarActionPerformed
         datos.setEnabled(false);
 
@@ -185,6 +194,10 @@ public class VISTAInsertar extends javax.swing.JFrame {
         men.setVisible(true);
     }//GEN-LAST:event_aceptarActionPerformed
 
+    /**
+     * Añade una nueva fila a la tabla.
+     * @param evt 
+     */
     private void añadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirActionPerformed
 
         datos.setEnabled(true);

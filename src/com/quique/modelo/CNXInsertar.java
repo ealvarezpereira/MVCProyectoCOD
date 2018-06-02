@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,6 +24,10 @@ public class CNXInsertar {
     private static DefaultTableModel mimodelo;
     private static ResultSet r;
 
+    /**
+     * Metodo que añade las tablas a un jcombobox, este metodo se ejecuta en el constructor.
+     * @return tablas es el arraylist de nombres de tablas.
+     */
     public static ArrayList<String> constructorDeInsertar() {
         ResultSet r;
         ArrayList<String> tablas = new ArrayList<String>();
@@ -42,6 +47,10 @@ public class CNXInsertar {
         return tablas;
     }
 
+    /**
+     * Cuando no hay insertado ningún dato nuevo simplemente recarga la tabla
+     * @return mimodelo el modelo de tabla.
+     */
     public static DefaultTableModel botonRecargarDeInsertarBoolTrue() {
 
         try {
@@ -72,6 +81,10 @@ public class CNXInsertar {
         return mimodelo;
     }
 
+    /**
+     * Cuando si se ha insertado un dato nuevo lo inserta en la tabla
+     * @param cadena son los valores que se insertan
+     */
     public static void botonRecargarDeInsertarBoolFalse(String cadena) {
 
         try {
@@ -80,7 +93,7 @@ public class CNXInsertar {
                     + CTRLInsertar.tablas()
                     + " values (" + cadena + ");");
             st.executeUpdate();
-            System.out.println("Realizado.");
+            JOptionPane.showMessageDialog(null, "Fila insertada.");
             CTRLInsertar.cambiarBoolean();
             st.close();
         } catch (SQLException ex) {
