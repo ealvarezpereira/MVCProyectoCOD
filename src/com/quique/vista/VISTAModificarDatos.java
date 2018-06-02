@@ -6,16 +6,9 @@
 package com.quique.vista;
 
 import com.quique.controlador.CTRLModificarDatos;
-import com.quique.modelo.ConexionBD;
-import java.sql.DatabaseMetaData;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -259,7 +252,6 @@ public class VISTAModificarDatos extends javax.swing.JFrame {
                 + "\nComboBox : Campo del valor que quieres borrar");
     }//GEN-LAST:event_interrogante2MouseClicked
 
-    String dato;
 
     /**
      * @param args the command line arguments

@@ -16,27 +16,49 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CTRLModificarDatos {
 
+    /**
+     * Llama al metodo del modelo
+     * @return nombre de tablas
+     */
     public static ArrayList<String> constructorModificarDatos() {
         ArrayList<String> tablas = new ArrayList<String>();
         return tablas = CNXModificarDatos.constructorModificarDatos();
     }
     
-        public static String tablas() {
+    /**
+     * Recibe la tabla seleccionada
+     * @return nombre de la tabla
+     */
+    public static String tablas() {
         String tablas;
         return tablas = String.valueOf(VISTAModificarDatos.tablas.getSelectedItem());
     }
         
-        public static DefaultTableModel botonRecargar(){
+    /**
+     * Llama al metodo recargar del modelo
+     * @return modelo de tabla
+     */
+    public static DefaultTableModel botonRecargar(){
         DefaultTableModel modelo = new DefaultTableModel();
         return modelo = CNXModificarDatos.botonRecargar();
         }    
         
-        public static ArrayList<String> botonCondicion() {
+    /**
+     * Llama al metodo condicion
+     * @return array de campos
+     */
+    public static ArrayList<String> botonCondicion() {
         ArrayList<String> concampos = new ArrayList<String>();
         return concampos = CNXModificarDatos.botonCondicion();
     }
         
-        public static void botonModificar(ArrayList<String>adatos,String concampos, String textoCondicion){
+    /**
+     * Llama al metodo condicion
+     * @param adatos Array de datos
+     * @param concampos Condicion de modificar
+     * @param textoCondicion Condicion por la cual modificas
+     */
+    public static void botonModificar(ArrayList<String>adatos,String concampos, String textoCondicion){
         
         CNXModificarDatos.botonModificar(adatos, concampos, textoCondicion);
         }

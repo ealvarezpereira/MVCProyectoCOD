@@ -20,6 +20,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CNXModificarDatos {
 
+    /**
+     * Carga los nombres de las tablas en un jcombobox.
+     * @return array de nombres de tablas
+     */
     public static ArrayList<String> constructorModificarDatos() {
 
         ResultSet r;
@@ -40,6 +44,10 @@ public class CNXModificarDatos {
         return tablas;
     }
 
+    /**
+     * Recarga los datos de la tabla seleccionada.
+     * @return modelo de tabla.
+     */
     public static DefaultTableModel botonRecargar() {
         DefaultTableModel mimodelo = new DefaultTableModel();
         try {
@@ -73,6 +81,12 @@ public class CNXModificarDatos {
     static String where = "";
     static String cadena = "";
 
+    /**
+     * Modifica los datos de la fila de la tabla seleccionada
+     * @param adatos Array de datos
+     * @param concampos Condicion por la cual modificas
+     * @param textoCondicion Texto de la condicion
+     */
     public static void botonModificar(ArrayList<String> adatos,String concampos, String textoCondicion) {
         try {
 
@@ -109,6 +123,10 @@ public class CNXModificarDatos {
 
     }
 
+    /**
+     * Boton que habilita la condicion
+     * @return array de nombres de campos
+     */
     public static ArrayList<String> botonCondicion() {
 
         ArrayList<String> concampos = new ArrayList<String>();
